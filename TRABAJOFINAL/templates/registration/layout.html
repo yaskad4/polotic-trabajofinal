@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+
+    <script type="text/javascript">
+      var user = "{{request.user}}";
+      function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        console.log('cookie:',cookieValue)
+        return cookieValue;
+      }
+      const csrftoken = getToken("csrftoken");
+      console.log('cookie:',csrftoken)
+
+    </script>
+    <title>Jaguarete KAA SA</title>
+  </head>
+  <body>
+    <div class="d-flex">
+      <div class="mr-auto p-2">
+        <a href="{% url 'index' %}">
+          <img class="logo" src="{% static 'images/logo.png'%}" alt="
+          width="50px"></a
+        >
+      </div>
+      <div class="form-inline p-2">
+        <a href="#" class="btn btn-primary">Login</a>
+        <a href="#" class="btn btn-warning">Registro</a>
+        <a href="{% url 'carrito' %}">
+          <img id="cart-icon" src="{% static 'images/carrito.png'%}" alt="
+          width="50px"></a
+        >
+        <p id="cart-total">{{cartItems}}</p>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'index' %}">Tienda</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <!-- <li class="nav-item active">
+              <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+            </li> -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Categorias
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Ratones</a>
+              <a class="dropdown-item" href="#">Teclados</a>
+              <a class="dropdown-item" href="#">Webcams</a>
+              <a class="dropdown-item" href="#">Digitalizadoras</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Acerca de</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Nuevo Producto</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Producto a buscar"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Buscar
+          </button>
+        </form>
+      </div>
+    </nav>
+    {% block content %} {% endblock content %}
+    <hr />
+    <div class="footer-basic">
+      <footer>
+        <div class="social">
+          <a href="#"><i class="icon ion-social-instagram"></i></a
+          ><a href="#"><i class="icon ion-social-snapchat"></i></a
+          ><a href="#"><i class="icon ion-social-twitter"></i></a
+          ><a href="#"><i class="icon ion-social-facebook"></i></a>
+        </div>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="/STORE">Tienda</a></li>
+          <li class="list-inline-item"><a href="acercade">Acercade</a></li>
+          <li class="list-inline-item"><a href="contacto">Contacto</a></li>
+          <li class="list-inline-item"><a href="#">Terminos</a></li>
+          <li class="list-inline-item">
+            <a href="#">Politica de Privacidad</a>
+          </li>
+        </ul>
+        <a href="{% url 'index' %}">
+              <img style="margin:auto;display:block;" class="logo" src="{% static 'images/logo.png'%}" alt=""></a
+            >
+        
+        <p class="copyright">Jaguarete KAA S.A. © 2021</p>
+      </footer>
+    </div>
+    <hr />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+      integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+  </body>
+</html>
+

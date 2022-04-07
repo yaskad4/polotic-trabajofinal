@@ -1,0 +1,42 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+
+{% block content %}
+<div style="margin-top: 5em;" class="container box-element">
+<form class="contact_form" action="" method="post" name="contact_form">
+    <ul>
+      <li>
+        <h2>Contacto</h2>
+        <span class="required_notification">* Indica campo requerido</span>
+      </li>
+      <li>
+        <label for="name">Nombre:</label>
+        <input type="text" name="name" placeholder="Aca va tu nombre .." required />
+        <span class="fa valid-icon"></span>
+      </li>
+      <li>
+        <label for="email">Email:</label>
+        <input type="email" name="email" placeholder="john_doe@example.com" required />
+        <span class="fa valid-icon"></span>
+        <span class="form_hint">Formato: "name@something.com"</span>
+      </li>
+      <li>
+        <label for="website">Website:</label>
+        <input type="url" name="website" placeholder="http://johndoe.com/" required pattern="(http|https)://.+" />
+        <span class="fa valid-icon"></span>
+        <span class="form_hint">Formato: "http://someaddress.com"</span>
+      </li>
+      <li>
+        <label for="message">Mensaje:</label>
+        <textarea name="message" cols="40" rows="6" required></textarea>
+        <span class="fa valid-icon"></span>
+      </li>
+      <li>
+        <button class="submit" type="submit">Enviar</button>
+      </li>
+    </ul>
+  </form>
+  
+</div>    
+{% endblock %}

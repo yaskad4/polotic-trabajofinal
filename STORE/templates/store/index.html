@@ -1,0 +1,42 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+
+<div class="row trioproductos">
+  {% for product in products %}
+  
+  <div class="col-lg-4">
+    <img class="thumbnail" src="{{ product.image.url }}" alt="" />
+    <div class="box-element product">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr />
+      <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Al carrito</button>
+      <a class="btn btn-outline-success" href="producto">Detalles</a>
+      <h5 style="display: inline-block; float: right">
+        <strong> ${{product.price|floatformat:2}}</strong>
+      </h5>
+    </div>
+  
+  </div>
+  {% endfor %}
+  <br><br><br>
+  <hr />
+  <div class="container col-lg-12 box-element">
+    <ul>
+      <h2 style="text-align: center;">Listado de productos </h2>
+
+      {% for product in restoproducts%}
+        <hr>
+        
+        <div class="row">
+            <div style="flex:1"><img class="row-image" src="{{ product.image.url }}" alt=""></div>
+            <div style="flex:3"><a href="#">{{ product.name }}</a></div>
+            <div style="flex:1">{{product.price}}</div>
+            <div style="flex:1"><button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Al carrito</button>
+            </div>
+      </div>
+    
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}
